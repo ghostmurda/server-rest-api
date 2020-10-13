@@ -7,22 +7,16 @@ router.get('/test', checkAuth, (req, res) => {
     res.send('authorized');
 })
 
-router.get('/users/following', checkAuth, (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
+router.get('/users/following', (req, res) => {
     res.json(followingList);
 });
 
-router.get('/users/popular', checkAuth, (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
+router.get('/users/popular', (req, res) => {
     let resJson = getPopularList(popularList, req.query.skip, req.query.pageSize);
     res.json(resJson);
 });
 
-router.get('/users/profile', checkAuth, (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
+router.get('/users/profile', (req, res) => {
     let resJson = getUser(popularList, req.query.userId);
     res.json(resJson);
 });
