@@ -4,7 +4,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 5000;
 const server = express();
-const {auth, getId} = require('./api/usersLoginData');
+const {auth, getId, getName} = require('./api/usersLoginData');
 
 server.use(cors({
         credentials: true,
@@ -20,7 +20,7 @@ server.use(session({
     secret: `s${(+new Date).toString(16)}`,
     cookie: {
         maxAge: 600000, // 10 minutes
-        //httpOnly: false,
+        httpOnly: false,
         //sameSite: 'none',
         //secure: true,
     },
@@ -32,15 +32,18 @@ server.use(session({
 server.get('/login', (req, res) => {
     if (auth(req.query.login, req.query.password) === 'success') {
         req.session.user = req.query.login;
-        res.send(getId(req.query.login));
-        console.log(`User ${req.session.user} is authorized`);
+        res.json({
+                userId: getId(req.query.login),
+                userName: getName(req.query.login)
+        });
+        //console.log(`User ${req.session.user} is authorized`);
     } else {
         res.send('failed');
     }
 });
 
 server.get('/logout', (req, res) => {
-    console.log(`User ${req.session.user} is logged out`);
+    //console.log(`User ${req.session.user} is logged out`);
     req.session.destroy();
     res.send('logout success');
 });

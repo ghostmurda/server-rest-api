@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { followingList, popularList, getPopularList, getUser } = require('./users');
+const { getFollowingList, getUsersList, getUser } = require('./users');
 const { checkAuth } = require('./usersLoginData');
 
 router.get('/test', checkAuth, (req, res) => {
@@ -8,16 +8,16 @@ router.get('/test', checkAuth, (req, res) => {
 })
 
 router.get('/users/following', (req, res) => {
-    res.json(followingList);
+    res.json(getFollowingList(req.query.userId));
 });
 
-router.get('/users/popular', (req, res) => {
-    let resJson = getPopularList(popularList, req.query.skip, req.query.pageSize);
+router.get('/users/all', (req, res) => {
+    let resJson = getUsersList(req.query.skip, req.query.pageSize);
     res.json(resJson);
 });
 
 router.get('/users/profile', (req, res) => {
-    let resJson = getUser(popularList, req.query.userId);
+    let resJson = getUser(req.query.userId);
     res.json(resJson);
 });
 
