@@ -1,13 +1,13 @@
 {
-  "name": "node-js-getting-started",
+  "name": "server",
   "version": "0.3.0",
-  "description": "A sample Node.js app using Express 4",
+  "description": "Simple server to provide REST API for react-social-network",
   "engines": {
     "node": "12.x"
   },
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node src/app.js",
     "test": "node test.js"
   },
   "dependencies": {
@@ -15,7 +15,8 @@
     "cors": "^2.8.5",
     "ejs": "^2.5.6",
     "express": "^4.15.2",
-    "express-session": "^1.17.1"
+    "express-session": "^1.17.1",
+    "lowdb": "^1.0.0"
   },
   "devDependencies": {
     "got": "^11.3.0",
