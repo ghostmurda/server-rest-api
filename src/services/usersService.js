@@ -25,4 +25,9 @@ let getUsersList = (skip, pageSize) => {
     return newArr;
 }
 
-module.exports = {getUser, getFollowingList, getUsersList};
+let updateInfo = (userId, newInfo) => {
+    db.get('users').find({"id": userId.toString()}).assign({info: newInfo}).write();
+    return db.get('users').find({"id": userId.toString()}).get('info').value();
+}
+
+module.exports = {getUser, getFollowingList, getUsersList, updateInfo};

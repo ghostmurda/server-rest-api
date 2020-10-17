@@ -2,11 +2,13 @@ const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 5000;
 const server = express();
 const {auth} = require('./services/usersLoginDataService');
 
 server.use(cookieParser());
+server.use(bodyParser.json());
 
 server.use(cors({
         credentials: true,
