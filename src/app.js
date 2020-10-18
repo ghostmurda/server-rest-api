@@ -28,8 +28,8 @@ server.use(session({
     unset: 'destroy'
 }));
 
-server.get('/login', (req, res) => {
-    res.json(auth(req.query.login, req.query.password));
+server.post('/login', (req, res) => {
+    res.json(auth(req.body.login, req.body.password));
 });
 
 server.get('/logout', (req, res) => {
