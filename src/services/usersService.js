@@ -30,4 +30,15 @@ let updateInfo = (userId, newInfo) => {
     return db.get('users').find({"id": userId.toString()}).get('info').value();
 }
 
-module.exports = {getUser, getFollowingList, getUsersList, updateInfo};
+let addPost = (userId, creator, text) => {
+    db.get('users').find({"id": userId.toString()}).get('postsData')
+        .push({
+            id: (db.get('users').find({"id": userId.toString()}).get('postsData').value()).length,
+            name: creator,
+            text
+        })
+        .write();
+    return true;
+}
+
+module.exports = {getUser, getFollowingList, getUsersList, updateInfo, addPost};
