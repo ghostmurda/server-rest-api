@@ -27,7 +27,7 @@ let getUsersList = (skip, pageSize) => {
 
 let updateInfo = (userId, newInfo) => {
     db.get('users').find({"id": userId.toString()}).assign({info: newInfo}).write();
-    return db.get('users').find({"id": userId.toString()}).get('info').value();
+    return true;
 }
 
 let addPost = (userId, creator, text) => {

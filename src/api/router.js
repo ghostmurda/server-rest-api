@@ -15,7 +15,9 @@ router.get('/users/profile', (req, res) => {
 });
 
 router.put('/users/info', (req, res) => {
-    res.json(updateInfo(req.body.userId, req.body.info));
+    if (updateInfo(req.body.userId, req.body.info)){
+        res.json(getUser(req.body.userId));
+    }
 });
 
 router.post('/users/profile/addpost', (req, res) => {
